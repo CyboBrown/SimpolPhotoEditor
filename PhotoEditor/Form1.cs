@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using WebCamLib;
 
 namespace PhotoEditor
 {
@@ -343,9 +344,12 @@ namespace PhotoEditor
         {
             if (current_mode != 2)
             {
-
+                
             }
             current_mode = 2;
+            DeviceManager.GetAllDevices();
+            Device dev = DeviceManager.GetDevice(0);
+            dev.ShowWindow(pictureBox3);
         }
 
         private void tsb_open_image_Click(object sender, EventArgs e)
