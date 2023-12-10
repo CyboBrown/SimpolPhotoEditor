@@ -13,19 +13,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using WebCamLib;
+using System.Security.AccessControl;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.Threading;
+using System.Diagnostics.Tracing;
 
 namespace PhotoEditor
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-            MaximizeBox = false;
-            MaximumSize = Size;
-            MinimumSize = Size;
-        }
-        
         byte current_mode = 0;
         Bitmap img_loaded;
         Bitmap img_loaded_image;
@@ -33,8 +30,20 @@ namespace PhotoEditor
         Image img_temp_0 = null;
         Image img_temp_1 = null;
         Bitmap img_prev;
+        Bitmap img_cam;
         Stack<Bitmap> img_stack = new Stack<Bitmap>();
         Color subtract_color = Color.FromArgb(0, 0, 255);
+        private VideoCaptureDevice videoSource;
+        private readonly object frameLock = new object();
+        private Thread processingThread;
+
+        public Form1()
+        {
+            InitializeComponent();
+            MaximizeBox = false;
+            MaximumSize = Size;
+            MinimumSize = Size;
+        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -308,6 +317,7 @@ namespace PhotoEditor
         {
             if(current_mode != 0)
             {
+                if(current_mode == 2) DisableWebcam();
                 toolStrip1.Visible = true;
                 toolStrip2.Visible = false;
                 pictureBox1.Visible = true;
@@ -326,6 +336,7 @@ namespace PhotoEditor
         {
             if (current_mode != 1)
             {
+                if (current_mode == 2) DisableWebcam();
                 toolStrip1.Visible = false;
                 toolStrip2.Visible = true;
                 pictureBox1.Visible = false;
@@ -344,12 +355,82 @@ namespace PhotoEditor
         {
             if (current_mode != 2)
             {
-                
+                InitializeWebcam();
+                processingThread = new Thread(ProcessFrames);
+                processingThread.Start();
             }
             current_mode = 2;
-            DeviceManager.GetAllDevices();
-            Device dev = DeviceManager.GetDevice(0);
-            dev.ShowWindow(pictureBox3);
+        }
+
+        private void InitializeWebcam()
+        {
+            FilterInfoCollection videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+
+            if (videoDevices.Count > 0)
+            {
+                videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
+                videoSource.NewFrame += VideoSource_NewFrame;
+                videoSource.Start();
+            }
+            else
+            {
+                MessageBox.Show("No video devices found.");
+            }
+        }
+
+        private void DisableWebcam()
+        {
+            if (videoSource != null && videoSource.IsRunning)
+            {
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
+            }
+
+            // Stop the processing thread
+            processingThread.Abort();
+        }
+
+        private void VideoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            lock (frameLock)
+            {
+                // Clone the new frame to avoid synchronization issues
+                img_cam = (Bitmap)eventArgs.Frame.Clone();
+            }
+            //pictureBox3.Image = (Bitmap) eventArgs.Frame.Clone();
+        }
+
+        private void ProcessFrames()
+        {
+            while (true)
+            {
+                Bitmap frameToProcess;
+                Bitmap frameFromProcess;
+
+                lock (frameLock)
+                {
+                    // Check if a new frame is available
+                    if (img_cam == null)
+                        continue;
+
+                    // Clone the frame to avoid synchronization issues
+                    frameToProcess = (Bitmap)img_cam.Clone();
+                    img_cam = null;
+                }
+
+                // Clone the original frame to avoid modifying it directly
+                frameFromProcess = (Bitmap) frameToProcess.Clone();
+
+                // Apply the grayscale filter
+                PhotoFilter.grayscale(frameFromProcess);
+
+                // Update the PictureBox with the filtered frame on the UI thread
+                BeginInvoke((MethodInvoker)delegate
+                {
+                    pictureBox3.Image = frameToProcess;
+                    pictureBox4.Image = frameFromProcess;
+                });
+            }
         }
 
         private void tsb_open_image_Click(object sender, EventArgs e)
