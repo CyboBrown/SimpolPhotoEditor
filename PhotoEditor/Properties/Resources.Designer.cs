@@ -93,6 +93,16 @@ namespace PhotoEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ic_capture {
+            get {
+                object obj = ResourceManager.GetObject("ic_capture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ic_flip_horizontally {
             get {
                 object obj = ResourceManager.GetObject("ic_flip_horizontally", resourceCulture);

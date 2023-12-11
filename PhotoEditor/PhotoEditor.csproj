@@ -145,10 +145,13 @@
     <None Include="Resources\ic_background_mode.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_camera_mode.png" />
+    <None Include="Resources\ic_subtract.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ic_subtract.png" />
+    <None Include="Resources\ic_capture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_camera_mode.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -65,12 +65,30 @@
             this.tsb_photo_mode_2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsb_background_mode_2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsb_camera_mode_2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.tsb_capture = new System.Windows.Forms.ToolStripButton();
+            this.tsb_save_shot = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsb_histogram_3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.toolStrip2.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -437,11 +455,180 @@
             // 
             // tsb_camera_mode_2
             // 
-            this.tsb_camera_mode_2.Image = global::PhotoEditor.Properties.Resources.ic_camera_mode;
+            this.tsb_camera_mode_2.Image = ((System.Drawing.Image)(resources.GetObject("tsb_camera_mode_2.Image")));
             this.tsb_camera_mode_2.Name = "tsb_camera_mode_2";
             this.tsb_camera_mode_2.Size = new System.Drawing.Size(271, 26);
             this.tsb_camera_mode_2.Text = "Live Camera Mode";
             this.tsb_camera_mode_2.Click += new System.EventHandler(this.tsb_camera_mode_Click);
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsb_capture,
+            this.tsb_save_shot,
+            this.toolStripSeparator8,
+            this.toolStripButton6,
+            this.toolStripButton7,
+            this.toolStripButton8,
+            this.toolStripButton9,
+            this.toolStripSeparator9,
+            this.toolStripButton10,
+            this.toolStripButton11,
+            this.toolStripSeparator10,
+            this.tsb_histogram_3,
+            this.toolStripSplitButton1});
+            this.toolStrip3.Location = new System.Drawing.Point(0, 27);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(1229, 27);
+            this.toolStrip3.TabIndex = 7;
+            this.toolStrip3.Text = "toolStrip3";
+            this.toolStrip3.Visible = false;
+            // 
+            // tsb_capture
+            // 
+            this.tsb_capture.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_capture.Image = global::PhotoEditor.Properties.Resources.ic_capture;
+            this.tsb_capture.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_capture.Name = "tsb_capture";
+            this.tsb_capture.Size = new System.Drawing.Size(29, 24);
+            this.tsb_capture.Text = "Capture Photo";
+            this.tsb_capture.Click += new System.EventHandler(this.tsb_capture_Click);
+            // 
+            // tsb_save_shot
+            // 
+            this.tsb_save_shot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_save_shot.Enabled = false;
+            this.tsb_save_shot.Image = global::PhotoEditor.Properties.Resources.ic_save;
+            this.tsb_save_shot.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_save_shot.Name = "tsb_save_shot";
+            this.tsb_save_shot.Size = new System.Drawing.Size(29, 24);
+            this.tsb_save_shot.Text = "Save File";
+            this.tsb_save_shot.Click += new System.EventHandler(this.tsb_save_file_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.AccessibleName = "";
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = global::PhotoEditor.Properties.Resources.ic_basic_copy;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton6.Text = "Basic Copy";
+            this.toolStripButton6.Click += new System.EventHandler(this.tsb_basic_copy_Click);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = global::PhotoEditor.Properties.Resources.ic_grayscale;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton7.Text = "Grayscale";
+            this.toolStripButton7.Click += new System.EventHandler(this.tsb_grayscale_Click);
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton8.Image = global::PhotoEditor.Properties.Resources.ic_sepia;
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton8.Text = "Sepia";
+            this.toolStripButton8.Click += new System.EventHandler(this.tsb_sepia_Click);
+            // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton9.Image = global::PhotoEditor.Properties.Resources.ic_invert_colors;
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton9.Text = "Invert Colors";
+            this.toolStripButton9.Click += new System.EventHandler(this.tsb_invert_colors_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton10
+            // 
+            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton10.Image = global::PhotoEditor.Properties.Resources.ic_flip_vertically;
+            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton10.Name = "toolStripButton10";
+            this.toolStripButton10.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton10.Text = "Flip Vertically";
+            this.toolStripButton10.Click += new System.EventHandler(this.tsb_flip_vertically_Click);
+            // 
+            // toolStripButton11
+            // 
+            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton11.Image = global::PhotoEditor.Properties.Resources.ic_flip_horizontally;
+            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton11.Name = "toolStripButton11";
+            this.toolStripButton11.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton11.Text = "Flip Horizontally";
+            this.toolStripButton11.Click += new System.EventHandler(this.tsb_flip_horizontally_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tsb_histogram_3
+            // 
+            this.tsb_histogram_3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsb_histogram_3.Enabled = false;
+            this.tsb_histogram_3.Image = global::PhotoEditor.Properties.Resources.ic_histogram;
+            this.tsb_histogram_3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_histogram_3.Name = "tsb_histogram_3";
+            this.tsb_histogram_3.Size = new System.Drawing.Size(29, 24);
+            this.tsb_histogram_3.Text = "Display Histogram";
+            this.tsb_histogram_3.Click += new System.EventHandler(this.tsb_histogram_Click);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.toolStripSplitButton1.Image = global::PhotoEditor.Properties.Resources.ic_mode;
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(39, 24);
+            this.toolStripSplitButton1.Text = "Switch Editor Mode";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = global::PhotoEditor.Properties.Resources.ic_photo_mode;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(271, 26);
+            this.toolStripMenuItem1.Text = "Photo Filter Mode";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.tsb_photo_mode_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Image = global::PhotoEditor.Properties.Resources.ic_background_mode;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(271, 26);
+            this.toolStripMenuItem2.Text = "Background Replace Mode";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.tsb_background_mode_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Image = global::PhotoEditor.Properties.Resources.ic_camera_mode;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(271, 26);
+            this.toolStripMenuItem3.Text = "Live Camera Mode";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.tsb_camera_mode_Click);
             // 
             // Form1
             // 
@@ -449,6 +636,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1229, 547);
+            this.Controls.Add(this.toolStrip3);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
@@ -459,6 +647,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Simpol Photo Editor";
+            this.Leave += new System.EventHandler(this.Form1_Leave);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -467,6 +656,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,6 +700,23 @@
         private System.Windows.Forms.ToolStripButton tsb_open_background;
         private System.Windows.Forms.ToolStripButton tsb_subtract;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton tsb_capture;
+        private System.Windows.Forms.ToolStripButton tsb_save_shot;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private System.Windows.Forms.ToolStripButton toolStripButton11;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton tsb_histogram_3;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }
 

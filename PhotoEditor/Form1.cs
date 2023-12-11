@@ -24,13 +24,17 @@ namespace PhotoEditor
     public partial class Form1 : Form
     {
         byte current_mode = 0;
+        int current_filter = 0;
         Bitmap img_loaded;
         Bitmap img_loaded_image;
         Bitmap img_loaded_background;
         Image img_temp_0 = null;
         Image img_temp_1 = null;
+        Image img_temp_2 = null;
+        Image img_temp_3 = null;
         Bitmap img_prev;
         Bitmap img_cam;
+        Bitmap img_cam_processed;
         Stack<Bitmap> img_stack = new Stack<Bitmap>();
         Color subtract_color = Color.FromArgb(0, 0, 255);
         private VideoCaptureDevice videoSource;
@@ -61,120 +65,144 @@ namespace PhotoEditor
 
         private void tsb_basic_copy_Click(object sender, EventArgs e)
         {
-            img_prev = (Bitmap)pictureBox2.Image;
-            img_stack.Push(img_prev);
-            Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
-            Color pixel;
-            for (int x = 0; x < img_prev.Width; x++)
+            current_filter = 0;
+            if(current_mode == 0)
             {
-                for (int y = 0; y < img_prev.Height; y++)
+                img_prev = (Bitmap)pictureBox2.Image;
+                img_stack.Push(img_prev);
+                Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
+                Color pixel;
+                for (int x = 0; x < img_prev.Width; x++)
                 {
-                    pixel = img_loaded.GetPixel(x, y);
-                    temp.SetPixel(x, y, pixel);
+                    for (int y = 0; y < img_prev.Height; y++)
+                    {
+                        pixel = img_loaded.GetPixel(x, y);
+                        temp.SetPixel(x, y, pixel);
+                    }
                 }
+                pictureBox2.Image = temp;
+                pictureBox2.Invalidate();
             }
-            pictureBox2.Image = temp;
-            pictureBox2.Invalidate();
         }
 
         private void tsb_grayscale_Click(object sender, EventArgs e)
         {
-            img_prev = (Bitmap)pictureBox2.Image;
-            img_stack.Push(img_prev);
-            Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
-            Color pixel;
-            for (int x = 0; x < img_prev.Width; x++)
+            current_filter = 1;
+            if (current_mode == 0)
             {
-                for (int y = 0; y < img_prev.Height; y++)
+                img_prev = (Bitmap)pictureBox2.Image;
+                img_stack.Push(img_prev);
+                Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
+                Color pixel;
+                for (int x = 0; x < img_prev.Width; x++)
                 {
-                    pixel = img_prev.GetPixel(x, y);
-                    int grey = (int)(pixel.R + pixel.G + pixel.B) / 3;
-                    temp.SetPixel(x, y, Color.FromArgb(grey, grey, grey));
+                    for (int y = 0; y < img_prev.Height; y++)
+                    {
+                        pixel = img_prev.GetPixel(x, y);
+                        int grey = (int)(pixel.R + pixel.G + pixel.B) / 3;
+                        temp.SetPixel(x, y, Color.FromArgb(grey, grey, grey));
+                    }
                 }
-            }
-            pictureBox2.Image = temp;
-            pictureBox2.Invalidate();
+                pictureBox2.Image = temp;
+                pictureBox2.Invalidate();
+            }  
         }
 
         private void tsb_sepia_Click(object sender, EventArgs e)
         {
-            img_prev = (Bitmap)pictureBox2.Image;
-            img_stack.Push(img_prev);
-            Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
-            Color pixel;
-            for (int x = 0; x < img_prev.Width; x++)
+            current_filter = 2;
+            if (current_mode == 0)
             {
-                for (int y = 0; y < img_prev.Height; y++)
+                img_prev = (Bitmap)pictureBox2.Image;
+                img_stack.Push(img_prev);
+                Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
+                Color pixel;
+                for (int x = 0; x < img_prev.Width; x++)
                 {
-                    pixel = img_prev.GetPixel(x, y);
-                    int r = pixel.R;
-                    int g = pixel.G;
-                    int b = pixel.B;
-                    int new_r = Math.Min(255, (int)(0.393 * r + 0.769 * g + 0.189 * b));
-                    int new_g = Math.Min(255, (int)(0.349 * r + 0.686 * g + 0.168 * b));
-                    int new_b = Math.Min(255, (int)(0.272 * r + 0.534 * g + 0.131 * b));
-                    temp.SetPixel(x, y, Color.FromArgb(new_r, new_g, new_b));
+                    for (int y = 0; y < img_prev.Height; y++)
+                    {
+                        pixel = img_prev.GetPixel(x, y);
+                        int r = pixel.R;
+                        int g = pixel.G;
+                        int b = pixel.B;
+                        int new_r = Math.Min(255, (int)(0.393 * r + 0.769 * g + 0.189 * b));
+                        int new_g = Math.Min(255, (int)(0.349 * r + 0.686 * g + 0.168 * b));
+                        int new_b = Math.Min(255, (int)(0.272 * r + 0.534 * g + 0.131 * b));
+                        temp.SetPixel(x, y, Color.FromArgb(new_r, new_g, new_b));
+                    }
                 }
+                pictureBox2.Image = temp;
+                pictureBox2.Invalidate();
             }
-            pictureBox2.Image = temp;
-            pictureBox2.Invalidate();
         }
 
         private void tsb_invert_colors_Click(object sender, EventArgs e)
         {
-            img_prev = (Bitmap)pictureBox2.Image;
-            img_stack.Push(img_prev);
-            Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
-            Color pixel;
-            for (int x = 0; x < img_prev.Width; x++)
+            current_filter = 3;
+            if (current_mode == 0)
             {
-                for (int y = 0; y < img_prev.Height; y++)
+                img_prev = (Bitmap)pictureBox2.Image;
+                img_stack.Push(img_prev);
+                Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
+                Color pixel;
+                for (int x = 0; x < img_prev.Width; x++)
                 {
-                    pixel = img_prev.GetPixel(x, y);
-                    int r = 255 - pixel.R;
-                    int g = 255 - pixel.G;
-                    int b = 255 - pixel.B;
-                    temp.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    for (int y = 0; y < img_prev.Height; y++)
+                    {
+                        pixel = img_prev.GetPixel(x, y);
+                        int r = 255 - pixel.R;
+                        int g = 255 - pixel.G;
+                        int b = 255 - pixel.B;
+                        temp.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
                 }
+                pictureBox2.Image = temp;
+                pictureBox2.Invalidate();
             }
-            pictureBox2.Image = temp;
-            pictureBox2.Invalidate();
         }
 
         private void tsb_flip_vertically_Click(object sender, EventArgs e)
         {
-            img_prev = (Bitmap)pictureBox2.Image;
-            img_stack.Push(img_prev);
-            Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
-            Color pixel;
-            for (int x = 0; x < img_prev.Width; x++)
+            current_filter = 4;
+            if (current_mode == 0)
             {
-                for (int y = 0; y < img_prev.Height; y++)
+                img_prev = (Bitmap)pictureBox2.Image;
+                img_stack.Push(img_prev);
+                Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
+                Color pixel;
+                for (int x = 0; x < img_prev.Width; x++)
                 {
-                    pixel = img_prev.GetPixel(img_prev.Width - x - 1, y);
-                    temp.SetPixel(x, y, pixel);
+                    for (int y = 0; y < img_prev.Height; y++)
+                    {
+                        pixel = img_prev.GetPixel(img_prev.Width - x - 1, y);
+                        temp.SetPixel(x, y, pixel);
+                    }
                 }
+                pictureBox2.Image = temp;
+                pictureBox2.Invalidate();
             }
-            pictureBox2.Image = temp;
-            pictureBox2.Invalidate();
         }
 
         private void tsb_flip_horizontally_Click(object sender, EventArgs e)
         {
-            img_prev = (Bitmap)pictureBox2.Image;
-            img_stack.Push(img_prev);
-            Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
-            Color pixel;
-            for (int x = 0; x < img_prev.Width; x++)
+            current_filter = 5;
+            if (current_mode == 0)
             {
-                for (int y = 0; y < img_prev.Height; y++)
+                img_prev = (Bitmap)pictureBox2.Image;
+                img_stack.Push(img_prev);
+                Bitmap temp = new Bitmap(img_prev.Width, img_prev.Height);
+                Color pixel;
+                for (int x = 0; x < img_prev.Width; x++)
                 {
-                    pixel = img_prev.GetPixel(x, img_prev.Height - y - 1);
-                    temp.SetPixel(x, y, pixel);
+                    for (int y = 0; y < img_prev.Height; y++)
+                    {
+                        pixel = img_prev.GetPixel(x, img_prev.Height - y - 1);
+                        temp.SetPixel(x, y, pixel);
+                    }
                 }
+                pictureBox2.Image = temp;
+                pictureBox2.Invalidate();
             }
-            pictureBox2.Image = temp;
-            pictureBox2.Invalidate();
         }
 
         private void tsb_open_file_Click(object sender, EventArgs e)
@@ -320,12 +348,15 @@ namespace PhotoEditor
                 if(current_mode == 2) DisableWebcam();
                 toolStrip1.Visible = true;
                 toolStrip2.Visible = false;
+                toolStrip2.Visible = false;
                 pictureBox1.Visible = true;
                 pictureBox3.Visible = false;
                 pictureBox4.Visible = false;
-                if(current_mode == 1)
+                if (current_mode == 1)
                 {
                     img_temp_1 = pictureBox2.Image;
+                    img_temp_2 = pictureBox3.Image;
+                    img_temp_3 = pictureBox4.Image;
                 }
                 pictureBox2.Image = img_temp_0;
             }
@@ -339,6 +370,39 @@ namespace PhotoEditor
                 if (current_mode == 2) DisableWebcam();
                 toolStrip1.Visible = false;
                 toolStrip2.Visible = true;
+                toolStrip3.Visible = false;
+                pictureBox1.Visible = false;
+                pictureBox3.Visible = true;
+                pictureBox4.Visible = true;
+                tsb_save_shot.Enabled = false;
+                tsb_histogram_3.Enabled = false;
+                if (current_mode == 0)
+                {
+                    img_temp_0 = pictureBox2.Image;
+                }
+                Thread.Sleep(100);
+                pictureBox2.Image = img_temp_1;
+                pictureBox3.Image = img_temp_2;
+                pictureBox4.Image = img_temp_3;
+            }
+            current_mode = 1;
+        }
+
+        private void tsb_camera_mode_Click(object sender, EventArgs e)
+        {
+            if (current_mode == 1)
+            {
+                img_temp_1 = pictureBox2.Image;
+                img_temp_2 = pictureBox3.Image;
+                img_temp_3 = pictureBox4.Image;
+            }
+            if (current_mode != 2)
+            {
+                tsb_save_shot.Enabled = false;
+                tsb_histogram_3.Enabled = false;
+                toolStrip1.Visible = false;
+                toolStrip2.Visible = false;
+                toolStrip3.Visible = true;
                 pictureBox1.Visible = false;
                 pictureBox3.Visible = true;
                 pictureBox4.Visible = true;
@@ -346,18 +410,10 @@ namespace PhotoEditor
                 {
                     img_temp_0 = pictureBox2.Image;
                 }
-                pictureBox2.Image = img_temp_1;
-            }
-            current_mode = 1;
-        }
-
-        private void tsb_camera_mode_Click(object sender, EventArgs e)
-        {
-            if (current_mode != 2)
-            {
                 InitializeWebcam();
                 processingThread = new Thread(ProcessFrames);
                 processingThread.Start();
+                pictureBox2.Image = null;
             }
             current_mode = 2;
         }
@@ -421,14 +477,33 @@ namespace PhotoEditor
                 // Clone the original frame to avoid modifying it directly
                 frameFromProcess = (Bitmap) frameToProcess.Clone();
 
-                // Apply the grayscale filter
-                PhotoFilter.grayscale(frameFromProcess);
+                // Apply the filter
+                switch(current_filter)
+                {
+                    case 1:
+                        PhotoFilter.grayscale(frameFromProcess);
+                        break;
+                    case 2:
+                        PhotoFilter.sepia(frameFromProcess);
+                        break;
+                    case 3:
+                        PhotoFilter.invert(frameFromProcess);
+                        break;
+                    case 4:
+                        PhotoFilter.flip_vertically(frameFromProcess);
+                        break;
+                    case 5:
+                        PhotoFilter.flip_horizontally(frameFromProcess);
+                        break;
+                }
+                
 
                 // Update the PictureBox with the filtered frame on the UI thread
                 BeginInvoke((MethodInvoker)delegate
                 {
                     pictureBox3.Image = frameToProcess;
                     pictureBox4.Image = frameFromProcess;
+                    img_cam_processed = frameFromProcess;
                 });
             }
         }
@@ -477,6 +552,18 @@ namespace PhotoEditor
             tsb_save_subtracted.Enabled = true;
             tsb_histogram_2.Enabled = true;
             pictureBox2.Invalidate();
+        }
+
+        private void tsb_capture_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Image = img_cam_processed;
+            tsb_save_shot.Enabled = true;
+            tsb_histogram_3.Enabled = true;
+        }
+
+        private void Form1_Leave(object sender, EventArgs e)
+        {
+            if (current_mode != 2) DisableWebcam();
         }
     }
 }
